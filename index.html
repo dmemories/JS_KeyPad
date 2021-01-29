@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DKey Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <div id="content1"></div>
+    <div id="content2"></div>
+    <input type="checkbox" id="wantUpper" onclick="setBoard( (this.checked ? true : false) );">
+    <input type="text" id="result"><input type="button" id="BTN_Copy" value="copy" onclick="copy();"/>
+
+</body>
+</html>
+
+<script>
+
+    function id(elementId) {
+        return document.getElementById(elementId);
+    }
+
+    function setBoard(wantUpper) {
+        // Init Board
+        let data = [
+            'A', 'B', 'C', 'D' , 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+        ];
+        let result = "<div class='main'/>";
+        let maxCol = 10;
+        let i = 0;
+        let realChr;
+
+        data = data.sort(() => Math.random() - 0.5)
+        data.forEach(function(element) {
+            if (i > maxCol) {
+                i = 0;
+                result = result + "</div><div class=\"main\"/>";
+            }
+            else {
+                realChr = (wantUpper ? element : element.toLowerCase());
+                result = result + "<div class=\"char\" onclick=\"fillChar('" + realChr + "')\">" + realChr + "</div>";
+                i++;
+            }
+        });
+        
+        id("content1").innerHTML = result + "</div>";
+
+        i = 0;
+        data = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+        data = data.sort(() => Math.random() - 0.5)
+        result = "<div class='main'/>";
+        data.forEach(function(element) {
+            if (i > maxCol) {
+                i = 0;
+                result = result + "</div><div class=\"main\"/>";
+            }
+            else {
+                result = result + "<div class=\"char\" onclick=\"fillChar('" + element + "')\">" + element + "</div>";
+                i++;
+            }
+        });
+        id("content2").innerHTML = result + "</div>";
+    }
+
+    function init() {
+        // Clear Old Value
+        id("wantUpper").checked = false;
+        id("result").value = "";
+
+        setBoard(false);
+    }
+
+    function fillChar(chr) {
+        let ele = id("result");
+        ele.value = ele.value + chr; 
+    }
+
+    function copy() {
+        let ele = id("result");
+        ele.select();
+        ele.setSelectionRange(0, 99999);
+        document.execCommand("copy");
+        ele.setSelectionRange(99999, 99999);
+    }
+
+    init();
+    
+</script>

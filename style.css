@@ -1,0 +1,38 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+html {
+    background-color: #000;
+    color: #FFF;   
+}
+#content1 {
+    margin-bottom: 10px;
+}
+#content2 {
+    margin-bottom: 50px;
+}
+
+.main {
+    display: flex;
+}
+.char {
+    width: 50px;
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+    border: solid 1px;
+    display: flex;
+    cursor: pointer;
+    opacity: 0.4;
+}
+
+.char:hover {
+    opacity: 1;
+}
+
+
+#result {
+    width: 250px;
+    color: #FFF;
+}
