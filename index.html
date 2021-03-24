@@ -25,24 +25,25 @@
     function setBoard(wantUpper) {
         // Init Board
         let data = [
-            'A', 'B', 'C', 'D' , 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+            'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
         ];
+        console.log(data.length);
         let result = "<div class='main'/>";
         let maxCol = 10;
         let i = 0;
         let realChr;
 
-        data = data.sort(() => Math.random() - 0.5)
+        //data = data.sort(() => Math.random() - 0.5)
         data.forEach(function(element) {
+            realChr = (wantUpper ? element : element.toLowerCase());
             if (i > maxCol) {
                 i = 0;
-                result = result + "</div><div class=\"main\"/>";
+                result = result + "</div><div class=\"main\"/><div class=\"char\" onclick=\"fillChar('" + realChr + "')\">" + realChr + "</div>";
             }
             else {
-                realChr = (wantUpper ? element : element.toLowerCase());
-                result = result + "<div class=\"char\" onclick=\"fillChar('" + realChr + "')\">" + realChr + "</div>";
-                i++;
+                result = result + "<div class=\"char\" onclick=\"fillChar('" + realChr + "')\">" + realChr + "</div>";;
             }
+            i++;
         });
         
         id("content1").innerHTML = result + "</div>";
